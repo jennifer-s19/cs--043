@@ -1,20 +1,21 @@
-#  Tic Tac Toe
+# Tic Tac Toe
 
 import random
 
 class TicTacToe:
     def drawBoard(self,board):
-        print('   |   |')
-        print(' ' + board[7] + ' | ' + board[8] + ' | ' + board[9])
-        print('   |   |')
-        print('-----------')
-        print('   |   |')
-        print(' ' + board[4] + ' | ' + board[5] + ' | ' + board[6])
-        print('   |   |')
-        print('-----------')
-        print('   |   |')
-        print(' ' + board[1] + ' | ' + board[2] + ' | ' + board[3])
-        print('   |   |')
+        print('    |   |')
+        print('  '  + board[7] + ' | ' + board[8] + ' | ' + board[9])
+        print('    |   |  ')
+        print('-------------')
+        print('    |   |')
+        print('  ' + board[4] + ' | ' + board[5] + ' | ' + board[6])
+        print('    |   | ')
+        print('-------------')
+        print('    |   |')
+        print('  ' + board[1] + ' | ' + board[2] + ' | ' + board[3])
+        print('    |   |  ')
+
 
     def inputPlayerLetter(self):
         letter = ''
@@ -34,7 +35,6 @@ class TicTacToe:
 
     def playAgain(self):
         print('Do you want to play again? (yes or no)')
-
         return input().lower().startswith('y')
 
     def makeMove(self, board, letter, move):
@@ -65,7 +65,8 @@ class TicTacToe:
         # Let the player type in their move.
         move = ' '
         while move not in '1 2 3 4 5 6 7 8 9'.split() or not play.isSpaceFree(board, int(move)):
-            print('What is your next move? (1-9)')
+            print('What is your next move?\n (7, 8, 9 \n 4, 5, 6, \n 1, 2, 3)')
+                                           
             move = input()
         return int(move)
 
@@ -75,14 +76,33 @@ class TicTacToe:
                 return False
         return True
 
+    def rules(self):
+        answer = ''
+        print('Do you want to read the rules? (yes or no)')
+        answer = input().lower()
+        if answer == 'yes':
+            print('Tic Tac Toe is a two-player game where each player\'s move is portrayed by either X or O and players take alternating turns.\n Your objective is to get three in a row, column, or diagonal with either three X\'s or O\'s before your oponent. \nTo make your move you will have to select a number that corresponds to a spot on the nine square grid. \nThere will be a smaller version of the grid to help you understand which number corresponds to which space.')
+        else:
+            print('Good luck!')
+
+
+
+        
+            
+    
+
 
 print('WELCOME TO TIC TAC TOE!')
+print()
+
 
 play = TicTacToe()
 
 while True:
     # Reset the board
     theBoard = [' '] * 10
+    play.rules()
+    print()
     player1Letter, player2Letter = play.inputPlayerLetter()
     turn = play.whoGoesFirst()
     print(turn + ' will go first.')
@@ -93,10 +113,11 @@ while True:
             play.drawBoard(theBoard)
             print("TURN: PLAYER 1")
             move = play.getPlayerMove(theBoard)
+            print()
             play.makeMove(theBoard, player1Letter, move)
             if play.isWinner(theBoard, player1Letter):
                 play.drawBoard(theBoard)
-                print('Hooray! You have won the game!')
+                print('Hooray! Player 1 you have won the game!')
                 gameIsPlaying = False
             else:
                 if play.isBoardFull(theBoard):
@@ -113,7 +134,7 @@ while True:
             play.makeMove(theBoard, player2Letter, move2)
             if play.isWinner(theBoard, player2Letter):
                 play.drawBoard(theBoard)
-                print('Hooray! You have won the game!')
+                print('Hooray! Player 2 you have won the game!')
                 gameIsPlaying = False
             else:
                 if play.isBoardFull(theBoard):
